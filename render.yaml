@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: pfc-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port 10000
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///app.db
+    autoDeploy: true
+    healthCheckPath: /docs
+    region: oregon
+    
+  - type: web
+    name: pfc-frontend
+    env: node
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npx serve -s dist -l 10001
+    plan: free
+    autoDeploy: true
+    region: oregon
