@@ -1,8 +1,20 @@
 
-import pyotp
 from fastapi import FastAPI, Depends, HTTPException
+from sqlalchemy.orm import Session
+from . import models, schemas, crud, auth
+from .database import SessionLocal, engine
+import pyotp
+
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Passion For Christ API", version="1.0.0")
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 def update_user(user_id: int, user: schemas.UserCreate, db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_current_user)):
     if current_user.role != "admin":
