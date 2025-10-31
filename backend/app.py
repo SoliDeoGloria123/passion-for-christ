@@ -1,7 +1,7 @@
 
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from . import models, schemas, crud, auth
+from backend import models, schemas, crud, auth
 from .database import SessionLocal, engine
 import pyotp
 
@@ -70,7 +70,7 @@ from fastapi import status
 @app.post("/api/v1/questions", response_model=schemas.Question, status_code=status.HTTP_201_CREATED, tags=["questions"])
 def create_question(question: schemas.QuestionCreate, db: Session = Depends(get_db)):
     return crud.create_question(db, question)
-from . import models, schemas, crud, auth
+from backend import models, schemas, crud, auth
 from fastapi.security import OAuth2PasswordRequestForm
 
 @app.post("/api/v1/login", response_model=schemas.Token, tags=["auth"])
@@ -112,7 +112,7 @@ def get_question(question_id: int, db: Session = Depends(get_db)):
     return question
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from . import models, schemas, crud
+from backend import models, schemas, crud
 from .database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
