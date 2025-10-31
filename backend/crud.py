@@ -28,7 +28,7 @@ def create_question(db: Session, question: schemas.QuestionCreate):
 	db.refresh(db_question)
 	return db_question
 from sqlalchemy.orm import Session
-from . import models, schemas
+from backend import models, schemas
 
 def get_articles(db: Session, skip: int = 0, limit: int = 10):
 	return db.query(models.Article).offset(skip).limit(limit).all()
