@@ -1,7 +1,7 @@
 
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from backend import models, schemas, crud, auth
+from . import models, schemas, crud, auth
 from .database import SessionLocal, engine
 import pyotp
 

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime
 from sqlalchemy.orm import relationship
-from backend.database import Base
+from .database import Base
 import datetime
 
 # Modelo simple para visitas (puede ser extendido para más métricas)
