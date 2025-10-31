@@ -1,5 +1,6 @@
+
 import pyotp
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException
 
 app = FastAPI(title="Passion For Christ API", version="1.0.0")
 
